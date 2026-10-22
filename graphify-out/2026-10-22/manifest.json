@@ -1,0 +1,242 @@
+{
+  "TeeSheet.slnx": {
+    "mtime": 1792619810.450833,
+    "seen": 1792629994.3167799,
+    "ast_hash": "61217d1f1e6de59b4ef048bb3ff21cd9",
+    "semantic_hash": "61217d1f1e6de59b4ef048bb3ff21cd9"
+  },
+  "global.json": {
+    "mtime": 1792619811.015413,
+    "seen": 1792629994.3167868,
+    "ast_hash": "c0b280d944ccffb8c72cb50d5a42deb3",
+    "semantic_hash": "c0b280d944ccffb8c72cb50d5a42deb3"
+  },
+  "scripts/db.ps1": {
+    "mtime": 1792619811.623431,
+    "seen": 1792629994.31679,
+    "ast_hash": "f46a461ebc86ca2b9c78debea9e6a956",
+    "semantic_hash": "f46a461ebc86ca2b9c78debea9e6a956"
+  },
+  "sql/00-create-database.sql": {
+    "mtime": 1792619812.0246947,
+    "seen": 1792629994.3167922,
+    "ast_hash": "52ce945a49deb9895a5b4240ad3e461f",
+    "semantic_hash": "52ce945a49deb9895a5b4240ad3e461f"
+  },
+  "sql/01-schema.sql": {
+    "mtime": 1792619812.310647,
+    "seen": 1792629994.3167944,
+    "ast_hash": "2df1ea30b8c910ba705f3add44017764",
+    "semantic_hash": "2df1ea30b8c910ba705f3add44017764"
+  },
+  "sql/02-seed.sql": {
+    "mtime": 1792619812.6662865,
+    "seen": 1792629994.3167963,
+    "ast_hash": "b611b8b4df75809d03117811183b6835",
+    "semantic_hash": "b611b8b4df75809d03117811183b6835"
+  },
+  "sql/99-drop-database.sql": {
+    "mtime": 1792619812.9643016,
+    "seen": 1792629994.3167984,
+    "ast_hash": "bdec4fbd100609486a75f45b47988a94",
+    "semantic_hash": "bdec4fbd100609486a75f45b47988a94"
+  },
+  "src/TeeSheet.Api/Endpoints/DevEndpoints.cs": {
+    "mtime": 1792619813.322008,
+    "seen": 1792629994.3168008,
+    "ast_hash": "81e893f51cfb27d4765b3e1ed6baf1e5",
+    "semantic_hash": "81e893f51cfb27d4765b3e1ed6baf1e5"
+  },
+  "src/TeeSheet.Api/Endpoints/TeeTimeEndpoints.cs": {
+    "mtime": 1792619813.5860596,
+    "seen": 1792629994.3168027,
+    "ast_hash": "5069faf72e58fb453f6ead22a3497429",
+    "semantic_hash": "5069faf72e58fb453f6ead22a3497429"
+  },
+  "src/TeeSheet.Api/Program.cs": {
+    "mtime": 1792619813.8548307,
+    "seen": 1792629994.316805,
+    "ast_hash": "6f268071583097b47dfe88aa9506ddc0",
+    "semantic_hash": "6f268071583097b47dfe88aa9506ddc0"
+  },
+  "src/TeeSheet.Api/Properties/launchSettings.json": {
+    "mtime": 1792619814.167289,
+    "seen": 1792629994.3168068,
+    "ast_hash": "7377f20adf65ab2890a94645255ec2f1",
+    "semantic_hash": "7377f20adf65ab2890a94645255ec2f1"
+  },
+  "src/TeeSheet.Api/TeeSheet.Api.csproj": {
+    "mtime": 1792619814.4721105,
+    "seen": 1792629994.3168094,
+    "ast_hash": "946f3eac4228fb54aba841c6dcd1136d",
+    "semantic_hash": "946f3eac4228fb54aba841c6dcd1136d"
+  },
+  "src/TeeSheet.Api/appsettings.Development.json": {
+    "mtime": 1792619814.7729251,
+    "seen": 1792629994.3168118,
+    "ast_hash": "b4efd923859e691bb4239617968d8af0",
+    "semantic_hash": "b4efd923859e691bb4239617968d8af0"
+  },
+  "src/TeeSheet.Api/appsettings.json": {
+    "mtime": 1792619815.02404,
+    "seen": 1792629994.3168137,
+    "ast_hash": "7f4436b045996748cd74aad7e9602e6d",
+    "semantic_hash": "7f4436b045996748cd74aad7e9602e6d"
+  },
+  "src/TeeSheet.Domain/Booking.cs": {
+    "mtime": 1792619815.323842,
+    "seen": 1792629994.3168156,
+    "ast_hash": "1b9841eb79a56e763f9e11f82e9c10c3",
+    "semantic_hash": "1b9841eb79a56e763f9e11f82e9c10c3"
+  },
+  "src/TeeSheet.Domain/Course.cs": {
+    "mtime": 1792619815.6255677,
+    "seen": 1792629994.3168175,
+    "ast_hash": "c0e97dbbd374c690cc813488e17ce589",
+    "semantic_hash": "c0e97dbbd374c690cc813488e17ce589"
+  },
+  "src/TeeSheet.Domain/Golfer.cs": {
+    "mtime": 1792619815.9552398,
+    "seen": 1792629994.3168192,
+    "ast_hash": "d1fc429c2e38564979816a9176f01a4b",
+    "semantic_hash": "d1fc429c2e38564979816a9176f01a4b"
+  },
+  "src/TeeSheet.Domain/Payment.cs": {
+    "mtime": 1792619816.232314,
+    "seen": 1792629994.316821,
+    "ast_hash": "be5e7fb1f9cf561826cd7190ffd18814",
+    "semantic_hash": "be5e7fb1f9cf561826cd7190ffd18814"
+  },
+  "src/TeeSheet.Domain/Statuses.cs": {
+    "mtime": 1792619816.5217552,
+    "seen": 1792629994.3168228,
+    "ast_hash": "29496835e7363217709ba99c89e96efb",
+    "semantic_hash": "29496835e7363217709ba99c89e96efb"
+  },
+  "src/TeeSheet.Domain/TeeSheet.Domain.csproj": {
+    "mtime": 1792619816.8236947,
+    "seen": 1792629994.3168244,
+    "ast_hash": "7c8babad7fd2aa41c90e1b7c1d1d1e1b",
+    "semantic_hash": "7c8babad7fd2aa41c90e1b7c1d1d1e1b"
+  },
+  "src/TeeSheet.Domain/TeeTime.cs": {
+    "mtime": 1792619817.0942287,
+    "seen": 1792629994.3168263,
+    "ast_hash": "2bcc523d16ecc1a0e77dc9792d8ab2be",
+    "semantic_hash": "2bcc523d16ecc1a0e77dc9792d8ab2be"
+  },
+  "src/TeeSheet.Infrastructure/Persistence/Configurations/BookingConfiguration.cs": {
+    "mtime": 1792619817.3557806,
+    "seen": 1792629994.3168283,
+    "ast_hash": "d0bb797a35445544bff0ac1a6b416fd9",
+    "semantic_hash": "d0bb797a35445544bff0ac1a6b416fd9"
+  },
+  "src/TeeSheet.Infrastructure/Persistence/Configurations/CourseConfiguration.cs": {
+    "mtime": 1792619817.6275015,
+    "seen": 1792629994.3168304,
+    "ast_hash": "a998aee4e9c44163e9a3dcbb996e260c",
+    "semantic_hash": "a998aee4e9c44163e9a3dcbb996e260c"
+  },
+  "src/TeeSheet.Infrastructure/Persistence/Configurations/GolferConfiguration.cs": {
+    "mtime": 1792619817.8939779,
+    "seen": 1792629994.316832,
+    "ast_hash": "5cc6ee1b3c74927f0a078031ae720cdc",
+    "semantic_hash": "5cc6ee1b3c74927f0a078031ae720cdc"
+  },
+  "src/TeeSheet.Infrastructure/Persistence/Configurations/PaymentConfiguration.cs": {
+    "mtime": 1792619818.1936245,
+    "seen": 1792629994.3168337,
+    "ast_hash": "688d87e1b35c5dddcef108297d696260",
+    "semantic_hash": "688d87e1b35c5dddcef108297d696260"
+  },
+  "src/TeeSheet.Infrastructure/Persistence/Configurations/TeeTimeConfiguration.cs": {
+    "mtime": 1792619818.528529,
+    "seen": 1792629994.3168356,
+    "ast_hash": "57f08332f4c9aae9e6d4e645d506c99a",
+    "semantic_hash": "57f08332f4c9aae9e6d4e645d506c99a"
+  },
+  "src/TeeSheet.Infrastructure/Persistence/TeeSheetDbContext.cs": {
+    "mtime": 1792619818.846971,
+    "seen": 1792629994.3168373,
+    "ast_hash": "1f1b05fadb75789f3c4ceb63f64726f4",
+    "semantic_hash": "1f1b05fadb75789f3c4ceb63f64726f4"
+  },
+  "src/TeeSheet.Infrastructure/Persistence/UtcDateTimeConverters.cs": {
+    "mtime": 1792619819.1569362,
+    "seen": 1792629994.316839,
+    "ast_hash": "eb2380ac23cfb962d58700560f966cab",
+    "semantic_hash": "eb2380ac23cfb962d58700560f966cab"
+  },
+  "src/TeeSheet.Infrastructure/TeeSheet.Infrastructure.csproj": {
+    "mtime": 1792619819.4525697,
+    "seen": 1792629994.3168404,
+    "ast_hash": "4e6e3fe4ae50f51bebc4b9944ad7bbbf",
+    "semantic_hash": "4e6e3fe4ae50f51bebc4b9944ad7bbbf"
+  },
+  "tests/TeeSheet.IntegrationTests/A1_GetTeeTimeByIdTests.cs": {
+    "mtime": 1792619819.7831113,
+    "seen": 1792629994.316842,
+    "ast_hash": "648265851601f653ea500721ae57dbf5",
+    "semantic_hash": "648265851601f653ea500721ae57dbf5"
+  },
+  "tests/TeeSheet.IntegrationTests/Infrastructure/ApiCollection.cs": {
+    "mtime": 1792619820.056569,
+    "seen": 1792629994.3168435,
+    "ast_hash": "f2a66c1295842fa91829291380208fdb",
+    "semantic_hash": "f2a66c1295842fa91829291380208fdb"
+  },
+  "tests/TeeSheet.IntegrationTests/Infrastructure/ApiFactory.cs": {
+    "mtime": 1792619820.3678954,
+    "seen": 1792629994.316845,
+    "ast_hash": "ce7fc4e019d19d8ea892a387b609ad9b",
+    "semantic_hash": "ce7fc4e019d19d8ea892a387b609ad9b"
+  },
+  "tests/TeeSheet.IntegrationTests/Infrastructure/SqlCommandLog.cs": {
+    "mtime": 1792619820.6402836,
+    "seen": 1792629994.3168466,
+    "ast_hash": "558a66eacc6f06464c049be6225de340",
+    "semantic_hash": "558a66eacc6f06464c049be6225de340"
+  },
+  "tests/TeeSheet.IntegrationTests/Infrastructure/TestData.cs": {
+    "mtime": 1792619820.9111047,
+    "seen": 1792629994.3168483,
+    "ast_hash": "b8d96828751f3dbd2a56c1c80c1ad052",
+    "semantic_hash": "b8d96828751f3dbd2a56c1c80c1ad052"
+  },
+  "tests/TeeSheet.IntegrationTests/TeeSheet.IntegrationTests.csproj": {
+    "mtime": 1792619821.1484027,
+    "seen": 1792629994.3168502,
+    "ast_hash": "252ede7c116722d0e16105d71e8d147d",
+    "semantic_hash": "252ede7c116722d0e16105d71e8d147d"
+  },
+  "tests/TeeSheet.UnitTests/ModelMappingTests.cs": {
+    "mtime": 1792619821.465004,
+    "seen": 1792629994.3168516,
+    "ast_hash": "7d4b13b3a2fc8f6497b92b43133eda5b",
+    "semantic_hash": "7d4b13b3a2fc8f6497b92b43133eda5b"
+  },
+  "tests/TeeSheet.UnitTests/TeeSheet.UnitTests.csproj": {
+    "mtime": 1792619821.771649,
+    "seen": 1792629994.3168533,
+    "ast_hash": "4e920bb2d41b70e0b25d0974a94bfee9",
+    "semantic_hash": "4e920bb2d41b70e0b25d0974a94bfee9"
+  },
+  "README.md": {
+    "mtime": 1792629459.8648405,
+    "seen": 1792629994.316855,
+    "ast_hash": "2060f2fab77f642bd14685e693b5be6f",
+    "semantic_hash": "2060f2fab77f642bd14685e693b5be6f"
+  },
+  "compose.yaml": {
+    "mtime": 1792619810.7404978,
+    "seen": 1792629994.3168566,
+    "ast_hash": "eeb3f86f14976c86312de863145536eb",
+    "semantic_hash": "eeb3f86f14976c86312de863145536eb"
+  },
+  "docs/forte-live-coding-mock-plan.md": {
+    "mtime": 1792618837.5867171,
+    "seen": 1792629994.3168583,
+    "ast_hash": "426a657afbf5add8b09f4c27c131d2fb",
+    "semantic_hash": "426a657afbf5add8b09f4c27c131d2fb"
+  }
+}

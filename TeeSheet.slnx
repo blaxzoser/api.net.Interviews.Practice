@@ -4,6 +4,9 @@
     <Project Path="src/TeeSheet.Domain/TeeSheet.Domain.csproj" />
     <Project Path="src/TeeSheet.Infrastructure/TeeSheet.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/src/TeeSheet.Dto/">
+    <Project Path="src/TeeSheet.Dto/TeeSheet.Dto/TeeSheet.Dto.csproj" />
+  </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/TeeSheet.IntegrationTests/TeeSheet.IntegrationTests.csproj" />
     <Project Path="tests/TeeSheet.UnitTests/TeeSheet.UnitTests.csproj" />

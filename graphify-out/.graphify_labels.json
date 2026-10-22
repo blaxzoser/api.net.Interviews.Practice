@@ -1,1 +1,18 @@
-{"0": "EF Core, React & SQL Exercises", "1": "Integration & Unit Test Infra", "2": "Domain Entities & EF Configs", "3": "Mock A: Web API Exercises", "4": "Projects, Compose & SQL Server", "5": "Advanced .NET & AI Practice", "6": "API Endpoints & DbContext Wiring", "7": "WebApplicationFactory Setup", "8": "SQL Command Logging", "9": "Booking Entity", "10": "TeeSheetDbContext", "11": "Launch Settings", "12": "Booking & Payment Statuses", "13": "TeeTime Entity", "14": "Golfer Entity", "15": "Course Entity", "16": "SQL Schema Tables", "17": "DB Script (db.ps1)", "18": "Create Database Script", "19": "Seed Script", "20": "Drop Database Script"}
+{
+  "1": "Integration & Unit Test Infra",
+  "4": "Projects, Compose & SQL Server",
+  "6": "API Endpoints & DbContext Wiring",
+  "7": "WebApplicationFactory Setup",
+  "8": "SQL Command Logging",
+  "9": "Booking Entity",
+  "11": "Launch Settings",
+  "12": "Booking & Payment Statuses",
+  "13": "TeeTime Entity",
+  "14": "Golfer Entity",
+  "15": "Course Entity",
+  "16": "SQL Schema Tables",
+  "17": "DB Script (db.ps1)",
+  "18": "Create Database Script",
+  "19": "Seed Script",
+  "20": "Drop Database Script"
+}

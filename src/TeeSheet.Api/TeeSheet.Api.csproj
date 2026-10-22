@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TeeSheet.Dto\TeeSheet.Dto\TeeSheet.Dto.csproj" />
     <ProjectReference Include="..\TeeSheet.Infrastructure\TeeSheet.Infrastructure.csproj" />
   </ItemGroup>
 
