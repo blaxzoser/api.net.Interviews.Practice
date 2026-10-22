@@ -1,0 +1,16 @@
+## .NET / Visual Studio
+bin/
+obj/
+.vs/
+*.user
+*.suo
+TestResults/
+*.log
+
+## Local secrets and environment
+.env
+appsettings.Local.json
+
+## Rider / VS Code
+.idea/
+.vscode/

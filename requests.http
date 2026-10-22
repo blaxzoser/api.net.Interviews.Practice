@@ -1,0 +1,19 @@
+@host = http://localhost:5080
+
+### Health
+GET {{host}}/health
+
+### Dev only: row counts per table (proves connection string + schema + EF mapping)
+GET {{host}}/dev/stats
+
+### Dev only: OpenAPI document
+GET {{host}}/openapi/v1.json
+
+### A1 - existing tee time (200)
+GET {{host}}/api/teetimes/1
+
+### A1 - not found (404 ProblemDetails)
+GET {{host}}/api/teetimes/999999999
+
+### A1 - not an int (404 from the route constraint)
+GET {{host}}/api/teetimes/abc
