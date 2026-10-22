@@ -14,3 +14,8 @@ appsettings.Local.json
 ## Rider / VS Code
 .idea/
 .vscode/
+
+## graphify: machine-local state (the graph outputs themselves are committed)
+graphify-out/cache/
+graphify-out/.graphify_python
+graphify-out/.graphify_root
