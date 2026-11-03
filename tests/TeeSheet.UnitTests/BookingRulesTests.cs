@@ -73,6 +73,16 @@ public class BookingRulesTests
         Assert.Equal(expected, BookingRules.IsWithinBookingWindow(Now.AddDays(10), isMember, Now));
     }
 
+    // A4: players are validated with IsValidPlayers above; this is the status rule.
+    [Theory]
+    [InlineData(BookingStatus.Held, true)]
+    [InlineData(BookingStatus.Confirmed, true)]
+    [InlineData(BookingStatus.Cancelled, false)]
+    public void Only_bookings_that_are_not_cancelled_can_change_players(BookingStatus status, bool expected)
+    {
+        Assert.Equal(expected, BookingRules.CanChangePlayers(status));
+    }
+
     [Fact]
     public void Hold_expires_10_minutes_after_now()
     {

@@ -309,10 +309,177 @@ About 2–3 h on weekdays and 4–5 h on weekend days. Adjust to your interview 
 
 ---
 
-### A4 — PATCH change players (20 min)
-**Build:** `PATCH /api/bookings/{id}` with `{ players }`. Change the booked count by the difference, respecting R1.
-**Checks:** the same concurrency approach as A3; `404`; can't change a cancelled booking (`409`).
-**Follow-up:** PUT vs PATCH semantics; JSON Patch vs a simple partial DTO.
+### A4 — PATCH change players (30 min)
+**Goal:** a golfer already has a booking and wants to change how many players are in it, for example from 2 to 3.
+
+**Endpoint:** `PATCH /api/bookings/{id}`, where `{id}` is `Bookings.BookingId`.
+
+**Request body:** the **new total** for this booking, not the number to add.
+```json
+{ "players": 3 }
+```
+
+**Success response:** `204 No Content`, with no body.
+
+**Fields you need:**
+
+| Table | Column | Meaning |
+|---|---|---|
+| `Bookings` | `BookingId` | The booking to change, from the URL |
+| `Bookings` | `TeeTimeId` | The tee time this booking belongs to |
+| `Bookings` | `Players` | Players in **this** booking: the old value |
+| `Bookings` | `Status` | `Held`, `Confirmed` or `Cancelled` |
+| `TeeTimes` | `BookedPlayers` | Players across **all** bookings on this tee time |
+| `TeeTimes` | `Capacity` | Maximum players on the tee time, usually 4 |
+
+**Capacity rule:** after the change, `TeeTimes.BookedPlayers` must be less than or equal to `TeeTimes.Capacity`.
+
+**The math:**
+```text
+oldPlayers       = Bookings.Players          (before the change)
+newPlayers       = players from the request
+newBookedPlayers = TeeTimes.BookedPlayers - oldPlayers + newPlayers
+
+Allowed only when newBookedPlayers <= TeeTimes.Capacity
+```
+
+| `BookedPlayers` before | This booking: old → new | `BookedPlayers` after | Result |
+|---|---|---|---|
+| 3 (this booking 2 + another 1) | 2 → 3 | 3 − 2 + 3 = 4 | `204` |
+| 4 (this booking 2 + another 2) | 2 → 3 | 4 − 2 + 3 = 5 | `409`, nothing changes |
+| 3 (this booking only) | 3 → 1 | 3 − 3 + 1 = 1 | `204`: reducing always fits |
+| 4 (this booking 2 + another 2) | 2 → 2 | 4 − 2 + 2 = 4 | `204`, nothing changes |
+
+**Checks, in this order:**
+
+| # | Check | If it fails |
+|---|---|---|
+| 1 | A booking with `BookingId = {id}` exists | `404 Not Found` |
+| 2 | `players` is from 1 to 4 | `400 Bad Request` |
+| 3 | `Bookings.Status` is not `Cancelled` | `409 Conflict` |
+| 4 | `newBookedPlayers <= Capacity` | `409 Conflict`, "Tee time is full" |
+
+Every error returns ProblemDetails (`TypedResults.Problem(...)`).
+
+**What to save: two updates in one transaction:**
+1. `TeeTimes.BookedPlayers` = `BookedPlayers - oldPlayers + newPlayers`, using a conditional `UPDATE` so the check and the write are one atomic statement.
+2. `Bookings.Players` = `newPlayers`.
+
+If check 4 fails, neither table changes. Don't change `Status`, `HoldExpiresUtc`, `TeeTimeId` or `GolferId`.
+
+```sql
+UPDATE TeeTimes
+SET BookedPlayers = BookedPlayers - @oldPlayers + @newPlayers
+WHERE TeeTimeId = @teeTimeId
+  AND BookedPlayers - @oldPlayers + @newPlayers <= Capacity;
+-- 0 rows affected: the tee time is full, so return 409
+```
+
+**Watch out:** don't send a negative difference such as `newPlayers - oldPlayers = -2` as one parameter. EF types a parameter compared with a `TINYINT` column as `byte`, so `-2` throws `OverflowException`. Use `- oldPlayers + newPlayers` as above.
+
+**Not checked in A4:** whether the tee time is in the past, and the member or visitor booking window.
+
+**Tests to write:**
+- 2 → 3 with room: `204`, and both tables are updated.
+- 3 → 1: `204`, and the spots are released.
+- 2 → 3 with no room: `409`, and neither table changes.
+- `players` of 0 or 5: `400`.
+- Unknown booking: `404`.
+- Cancelled booking: `409`.
+
+**Follow-ups:** PUT vs PATCH semantics; JSON Patch vs a simple partial DTO.
+
+---
+
+### A4.1 — PUT replace booking (30 min)
+**Goal:** the PUT version of A4. The request sends the **whole** booking, so the golfer can also move it to another tee time.
+
+**Endpoint:** `PUT /api/bookings/{id}`, where `{id}` is `Bookings.BookingId`.
+
+**Request body:** all three fields are required.
+```json
+{
+  "teeTimeId": 43,
+  "golferId": 7,
+  "players": 2
+}
+```
+
+**Success response:** `204 No Content`, with no body, the same as A4.
+
+**Fields you need:** the A4 table, plus these:
+
+| Table | Column | Meaning |
+|---|---|---|
+| `Bookings` | `GolferId` | The golfer who owns the booking |
+| `TeeTimes` | `StartUtc` | When the tee time starts, in UTC |
+| `Golfers` | `GolferId` | The golfer from the request |
+| `Golfers` | `IsMember` | `true` = member, `false` = visitor |
+
+**The math, case 1: same tee time** (`teeTimeId` equals `Bookings.TeeTimeId`). Use the A4 formula:
+```text
+newBookedPlayers = BookedPlayers - oldPlayers + newPlayers   (must be <= Capacity)
+```
+
+**The math, case 2: different tee time.** Two tee times change:
+```text
+Old tee time: BookedPlayers = BookedPlayers - oldPlayers    (always allowed)
+New tee time: BookedPlayers = BookedPlayers + newPlayers    (only if the result <= Capacity)
+```
+
+| Old tee time before | New tee time before | Booking: old → new | After | Result |
+|---|---|---|---|---|
+| 3 | 1 | 2 players, move | Old 1, new 3 | `204` |
+| 3 | 3 | 2 players, move | Nothing changes | `409`: 3 + 2 = 5 is over capacity |
+| 2 | 0 | 2 → 4, move | Old 0, new 4 | `204` |
+
+**Checks, in this order:**
+
+| # | Check | If it fails |
+|---|---|---|
+| 1 | The body has `teeTimeId`, `golferId` and `players` | `400 Bad Request` |
+| 2 | `players` is from 1 to 4 | `400 Bad Request` |
+| 3 | A booking with `BookingId = {id}` exists | `404 Not Found` |
+| 4 | `Bookings.Status` is not `Cancelled` | `409 Conflict` |
+| 5 | A tee time with `TeeTimeId = teeTimeId` exists, and its `StartUtc` is after now (UTC) | `404 Not Found` |
+| 6 | A golfer with `GolferId = golferId` exists | `404 Not Found` |
+| 7 | Booking window: `StartUtc <= now + 14 days` if `IsMember` is `true`, or `now + 7 days` if `false` | `422 Unprocessable Entity` |
+| 8 | Capacity: the case 1 or case 2 math above | `409 Conflict`, "Tee time is full" |
+
+Every error returns ProblemDetails.
+
+**Missing fields:** mark the DTO properties `required`, so JSON binding returns `400` when one is missing. Otherwise a missing `players` arrives as 0, and a missing `teeTimeId` as 0. In PUT, a missing field doesn't mean "keep the old value".
+
+**What to save, in one transaction:**
+1. The tee time update or updates from the math above, using a conditional `UPDATE` for the tee time that gains players.
+2. `Bookings.TeeTimeId`, `Bookings.GolferId` and `Bookings.Players`, set to the request values.
+
+If any check fails, nothing changes. Don't change `Status`, `HoldExpiresUtc` or `CreatedUtc`.
+
+```sql
+-- Case 2: move to another tee time
+UPDATE TeeTimes
+SET BookedPlayers = BookedPlayers + @newPlayers
+WHERE TeeTimeId = @newTeeTimeId
+  AND BookedPlayers + @newPlayers <= Capacity;
+-- 0 rows affected: the new tee time is full, so roll back and return 409
+
+UPDATE TeeTimes
+SET BookedPlayers = BookedPlayers - @oldPlayers
+WHERE TeeTimeId = @oldTeeTimeId;
+```
+
+**Tests to write:**
+- **Idempotency:** the same PUT sent twice gives the same counts as sending it once.
+- **Move:** both tee times have the right counts.
+- **Move to a full tee time:** `409`, and the old tee time is unchanged.
+- **Missing field:** a body without `players` returns `400`.
+- **Same tee time:** behaves like A4.
+
+**Follow-ups:**
+- Why must PUT be idempotent when POST isn't?
+- When would you choose PUT over PATCH?
+- Two bookings move between the same two tee times in opposite directions at the same time. Why can that deadlock, and how does updating the tee times in `TeeTimeId` order prevent it?
 
 ---
 
@@ -372,6 +539,8 @@ About 2–3 h on weekdays and 4–5 h on weekend days. Adjust to your interview 
 ---
 
 ### A — Theory rapid-fire (practise answering in under 45 s each)
+Deep answers, samples and traps for every question: [cheatsheet-theory-a-rapid-fire.md](cheatsheet-theory-a-rapid-fire.md).
+
 1. Request pipeline order, start to finish.
 2. Singleton/scoped/transient + captive dependency + `ValidateScopes`.
 3. What happens to the thread at `await`? Why is `.Result` dangerous?

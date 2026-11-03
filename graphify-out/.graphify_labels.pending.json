@@ -1,19 +1,25 @@
 {
   "0": "Mock D - SQL Server",
   "1": "Task",
-  "2": "EntityTypeBuilder",
+  "2": "ModelMappingTests.cs",
   "3": "Mock A - .NET Web API live coding",
   "5": "Forte Group Live Coding & Mock Interview Practice Plan",
+  "6": "microsoft_entityframeworkcore",
   "7": "Course",
   "10": "TeeSheetDbContext",
   "12": "Payment",
   "15": "Cheat sheet: booking safely under concurrency",
   "21": "A2 cheatsheet - GET tee times list (filter, sort, paging)",
+  "22": "Cheat sheet: Theory A, rapid-fire (.NET API)",
   "23": "A1 - GET by id (warm-up)",
   "24": "Mock B - EF Core",
+  "25": "TeeSheet.Infrastructure.Persistence.Configurations",
   "26": "Full Mock #1 - Forte technical interview (90 min)",
   "27": "Mock C - React + TypeScript live coding",
   "28": "Mock A - .NET Web API live coding",
   "29": "Mock F - AI-assisted round (Claude Code, MCP)",
-  "30": "DateTime"
+  "30": "DateTime",
+  "31": "TeeSheet.Domain",
+  "32": "ResponseGenericDto",
+  "33": "PaymentStatus"
 }

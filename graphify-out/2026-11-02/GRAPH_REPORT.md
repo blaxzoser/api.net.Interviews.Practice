@@ -1,42 +1,42 @@
 # Graph Report - api.net.Interviews.Practice  (2026-11-02)
 
 ## Corpus Check
-- 52 files · ~18,624 words
+- 55 files · ~21,930 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 6 file(s) not represented in the graph (top: (none) 2, .props 2, .example 1)
 
 ## Summary
-- 467 nodes · 884 edges · 30 communities (25 shown, 5 thin omitted)
-- Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 89 edges (avg confidence: 0.88)
+- 497 nodes · 990 edges · 30 communities (25 shown, 5 thin omitted)
+- Extraction: 91% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 92 edges (avg confidence: 0.88)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `21cf801c`
+- Built from commit: `359a7a3a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - Mock D - SQL Server
 - Task
-- EntityTypeBuilder
+- ModelMappingTests.cs
 - Mock A - .NET Web API live coding
 - Projects, Compose & SQL Server
 - Forte Group Live Coding & Mock Interview Practice Plan
-- API Endpoints & DbContext Wiring
-- WebApplicationFactory Setup
+- microsoft_entityframeworkcore
+- Course
 - SQL Command Logging
 - Booking Entity
 - TeeSheetDbContext
 - Launch Settings
-- Booking & Payment Statuses
+- Payment
 - TeeTime Entity
 - Golfer Entity
-- TeeSheet.Domain
+- Cheat sheet: booking safely under concurrency
 - SQL Schema Tables
 - A2 cheatsheet - GET tee times list (filter, sort, paging)
 - A1 - GET by id (warm-up)
 - Mock B - EF Core
-- Payment
+- TeeSheet.Domain
 - Full Mock #1 - Forte technical interview (90 min)
 - Mock C - React + TypeScript live coding
 - Mock A - .NET Web API live coding
@@ -46,26 +46,26 @@
 ## God Nodes (most connected - your core abstractions)
 1. `Forte Group Live Coding & Mock Interview Practice Plan` - 31 edges
 2. `Booking` - 25 edges
-3. `A3_CreateBookingTests` - 22 edges
-4. `TeeTime` - 21 edges
-5. `TeeSheetDbContext` - 21 edges
-6. `TeeSheet.Domain` - 18 edges
+3. `TeeSheetDbContext` - 22 edges
+4. `A3_CreateBookingTests` - 22 edges
+5. `TeeTime` - 21 edges
+6. `TeeSheet.Domain` - 19 edges
 7. `Course` - 17 edges
-8. `Payment` - 16 edges
-9. `ApiFactory` - 16 edges
+8. `ApiFactory` - 17 edges
+9. `Payment` - 16 edges
 10. `Mock D - SQL Server` - 16 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Track A — API` --references--> `BookingRules`  [INFERRED]
   docs/track-by-blaxzoser.md → src/TeeSheet.Domain/BookingRules.cs
+- `Projection vs loading strategies ("the three types")` --references--> `Course`  [INFERRED]
+  docs/awnsers-deep-cheatsheet.md → src/TeeSheet.Domain/Course.cs
 - `Where does `endUtc` come from?` --references--> `TeeTime`  [INFERRED]
   docs/awnsers-deep-cheatsheet.md → src/TeeSheet.Domain/TeeTime.cs
 - `Booking entity (Players, Status Held/Confirmed/Cancelled, HoldExpiresUtc, IdempotencyKey)` --references--> `Booking`  [INFERRED]
   docs/forte-live-coding-mock-plan.md → src/TeeSheet.Domain/Booking.cs
-- `Projection vs loading strategies ("the three types")` --references--> `Course`  [INFERRED]
+- ``.Where()` / `.FirstOrDefaultAsync()` are not projection` --references--> `Course`  [INFERRED]
   docs/awnsers-deep-cheatsheet.md → src/TeeSheet.Domain/Course.cs
-- `Course entity (TimeZoneId IANA, Country, Currency)` --references--> `Course`  [INFERRED]
-  docs/forte-live-coding-mock-plan.md → src/TeeSheet.Domain/Course.cs
 
 ## Import Cycles
 - None detected.
@@ -82,8 +82,8 @@ Cohesion: 0.19
 Nodes (13): Answer keys (E1, E2, E3 issues and hints), D11 - Gaps & islands: free time windows, D12 - Bulk insert (TVP, OPENJSON, SqlBulkCopy), D1 - Joins & aggregation (utilization), D2 - Window functions (DENSE_RANK, running total, LAG), D3 - Data integrity hunt (overbookings, wrong counters), D4 - usp_BookTeeTime atomic booking proc, D5 - Index design (IX_TeeTimes_CourseId_StartUtc) (+5 more)
 
 ### Community 1 - "Task"
-Cohesion: 0.14
-Nodes (6): A1_GetTeeTimeByIdTests, TeeTimeResponse, A3_CreateBookingTests, ApiFactory, SqlLog, TestData
+Cohesion: 0.19
+Nodes (3): A1_GetTeeTimeByIdTests, A3_CreateBookingTests, A4_ChangePlayersTests
 
 ### Community 3 - "Mock A - .NET Web API live coding"
 Cohesion: 0.27
@@ -97,53 +97,53 @@ Nodes (29): sqlserver service (mssql/server:2022-latest, container teesheet-sql)
 Cohesion: 0.30
 Nodes (9): Booking entity (Players, Status Held/Confirmed/Cancelled, HoldExpiresUtc, IdempotencyKey), Course entity (TimeZoneId IANA, Country, Currency), Golfer entity (IsMember), Interviewer prompt for a Claude mock interview, Payment entity (Status Pending/Captured/Failed/Refunded), Forte Group Live Coding & Mock Interview Practice Plan, Self-scoring rubric (1-4 across 7 dimensions), TeeTimeDb SQL schema + random seed (+1 more)
 
-### Community 6 - "API Endpoints & DbContext Wiring"
+### Community 6 - "microsoft_entityframeworkcore"
 Cohesion: 0.07
-Nodes (19): TeeSheet.Infrastructure.Persistence, TeeSheet.Api.Endpoints, TeeSheet.Dto, BookingEndpoints, CourseEndPoints, DevEndpoints, TeeTimeEndpoints, Program (+11 more)
+Nodes (14): TeeSheet.Infrastructure.Persistence, TeeSheet.Api.Endpoints, TeeSheet.Dto, TeeSheet.IntegrationTests.Infrastructure, TeeSheet.IntegrationTests, DevEndpoints, Program, ResponseGenericDto (+6 more)
 
-### Community 7 - "WebApplicationFactory Setup"
-Cohesion: 0.11
-Nodes (3): TeeSheet.IntegrationTests.Infrastructure, TeeSheet.IntegrationTests, ApiCollection
+### Community 7 - "Course"
+Cohesion: 0.20
+Nodes (8): Course, Country, CourseId, Currency, Name, TeeTimes, TimeZoneId, CourseConfiguration
 
 ### Community 8 - "SQL Command Logging"
-Cohesion: 0.12
-Nodes (4): PagedResult, CommandLogger, SqlCommandLog, Commands
+Cohesion: 0.07
+Nodes (8): PagedResult, ApiCollection, ApiFactory, SqlLog, CommandLogger, SqlCommandLog, Commands, TestData
 
 ### Community 9 - "Booking Entity"
 Cohesion: 0.17
 Nodes (12): Booking, BookingId, CreatedUtc, Golfer, GolferId, HoldExpiresUtc, IdempotencyKey, Payments (+4 more)
 
 ### Community 10 - "TeeSheetDbContext"
-Cohesion: 0.10
-Nodes (14): TeeTimeDto, CourseName, Currency, Id, Price, SpotsLeft, StartLocal, StartUtc (+6 more)
+Cohesion: 0.06
+Nodes (23): BookingEndpoints, CourseEndPoints, TeeTimeEndpoints, BookingRequestDto, GolferId, Players, TeeTimeId, BookingRequestUpdateBookedDto (+15 more)
 
 ### Community 11 - "Launch Settings"
 Cohesion: 0.18
 Nodes (10): ASPNETCORE_ENVIRONMENT, applicationUrl, commandName, dotnetRunMessages, environmentVariables, launchBrowser, launchUrl, profiles (+2 more)
 
-### Community 12 - "Booking & Payment Statuses"
+### Community 12 - "Payment"
 Cohesion: 0.20
-Nodes (9): BookingStatus, Cancelled, Confirmed, Held, PaymentStatus, Captured, Failed, Pending (+1 more)
+Nodes (9): Payment, Amount, Booking, BookingId, CreatedUtc, Currency, PaymentId, Status (+1 more)
 
 ### Community 13 - "TeeTime Entity"
-Cohesion: 0.17
-Nodes (11): TeeTime, BookedPlayers, Bookings, Capacity, Course, CourseId, Price, RowVersion (+3 more)
+Cohesion: 0.15
+Nodes (10): TeeTime, BookedPlayers, Bookings, Capacity, Course, CourseId, Price, RowVersion (+2 more)
 
 ### Community 14 - "Golfer Entity"
-Cohesion: 0.20
+Cohesion: 0.25
 Nodes (8): Golfer, Bookings, Email, FirstName, GolferId, IsMember, LastName, GolferConfiguration
 
-### Community 15 - "TeeSheet.Domain"
-Cohesion: 0.23
-Nodes (3): TeeSheet.Infrastructure.Persistence.Configurations, TeeSheet.Domain, PaymentConfiguration
+### Community 15 - "Cheat sheet: booking safely under concurrency"
+Cohesion: 0.22
+Nodes (8): (a) Atomic conditional `UPDATE`, (b) EF Core optimistic concurrency on `RowVersion` + retry, (c) Transaction with `UPDLOCK, ROWLOCK`, Cheat sheet: booking safely under concurrency, How to answer in an interview, Quick comparison, Testing any of them, The problem: "read, check, then write" is a race
 
 ### Community 16 - "SQL Schema Tables"
 Cohesion: 0.60
 Nodes (5): Bookings, Courses, Golfers, Payments, TeeTimes
 
 ### Community 21 - "A2 cheatsheet - GET tee times list (filter, sort, paging)"
-Cohesion: 0.06
-Nodes (30): A1 cheatsheet - GET tee time by id, A2 cheatsheet - GET tee times list (filter, sort, paging), Comparison, Gotchas (REVIEW LATER in the code), How offset paging works (the code from line 62), Isolated pagination samples (no EF, no API - just the algorithm), Minimal API vs controller, Option 1 - Offset with plain `if`s (no `Math.Clamp`) (+22 more)
+Cohesion: 0.08
+Nodes (23): A1 cheatsheet - GET tee time by id, A2 cheatsheet - GET tee times list (filter, sort, paging), Comparison, Gotchas (REVIEW LATER in the code), How offset paging works (the code from line 62), Isolated pagination samples (no EF, no API - just the algorithm), Minimal API vs controller, Option 1 - Offset with plain `if`s (no `Math.Clamp`) (+15 more)
 
 ### Community 23 - "A1 - GET by id (warm-up)"
 Cohesion: 0.15
@@ -153,9 +153,9 @@ Nodes (13): A12 - Integration tests, A1 - GET by id (warm-up), A9 - Correlation 
 Cohesion: 0.29
 Nodes (7): A8 - Hold expiry with BackgroundService, B2 - Tracking vs no-tracking, B3 - Cartesian explosion (AsSplitQuery), B4 - Bulk operations (ExecuteUpdateAsync), B5 - Zero-downtime migrations (expand/migrate/contract), B6 - Global query filter + soft delete, Mock B - EF Core
 
-### Community 25 - "Payment"
-Cohesion: 0.25
-Nodes (8): Payment, Amount, Booking, BookingId, CreatedUtc, Currency, PaymentId, Status
+### Community 25 - "TeeSheet.Domain"
+Cohesion: 0.21
+Nodes (4): TeeSheet.Infrastructure.Persistence.Configurations, TeeSheet.Domain, BookingConfiguration, TeeTimeConfiguration
 
 ### Community 26 - "Full Mock #1 - Forte technical interview (90 min)"
 Cohesion: 0.27
@@ -174,33 +174,33 @@ Cohesion: 0.22
 Nodes (8): A6 - Idempotency-Key on POST, F1 - Write your CLAUDE.md, F2 - Guardrails with hooks & permissions, F3 - Feature with Claude Code under a timer, F5 - MCP setup and talking points, Full Mock #3 - AI-assisted live task (60 min), Model Context Protocol (tools, resources, prompts; risks and mitigations), Mock F - AI-assisted round (Claude Code, MCP)
 
 ### Community 30 - "DateTime"
-Cohesion: 0.09
-Nodes (6): TeeSheet.UnitTests, BookingRules, NullableUtcDateTimeConverter, UtcDateTimeConverter, BookingRulesTests, ModelMappingTests
+Cohesion: 0.08
+Nodes (14): BookingRules, BookingStatus, Cancelled, Confirmed, Held, PaymentStatus, Captured, Failed (+6 more)
 
 ## Ambiguous Edges - Review These
 - `A1 GET /api/teetimes/{id:int} -> TeeTimeDto` → `R1 capacity: non-cancelled players never exceed Capacity`  [AMBIGUOUS]
   README.md · relation: conceptually_related_to
 
 ## Knowledge Gaps
-- **100 isolated node(s):** `Microsoft.AspNetCore.OpenApi`, `Microsoft.EntityFrameworkCore.Design`, `Microsoft.NET.Sdk.Web`, `BookingId`, `TeeTimeId` (+95 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 168 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **101 isolated node(s):** `Microsoft.AspNetCore.OpenApi`, `Microsoft.EntityFrameworkCore.Design`, `Microsoft.NET.Sdk.Web`, `BookingId`, `TeeTimeId` (+96 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 176 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Forte Group Live Coding & Mock Interview Practice Plan` connect `Forte Group Live Coding & Mock Interview Practice Plan` to `Mock D - SQL Server`, `Mock A - .NET Web API live coding`, `Projects, Compose & SQL Server`, `Mock B - EF Core`, `Full Mock #1 - Forte technical interview (90 min)`, `Mock C - React + TypeScript live coding`, `Mock A - .NET Web API live coding`, `Mock F - AI-assisted round (Claude Code, MCP)`?**
-  _High betweenness centrality (0.250) - this node is a cross-community bridge._
+  _High betweenness centrality (0.237) - this node is a cross-community bridge._
 - **Are the 3 inferred relationships involving `Booking` (e.g. with `Booking entity (Players, Status Held/Confirmed/Cancelled, HoldExpiresUtc, IdempotencyKey)` and `.CreateBookingRequest()`) actually correct?**
   _`Booking` has 3 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `Microsoft.AspNetCore.OpenApi`, `Microsoft.EntityFrameworkCore.Design`, `Microsoft.NET.Sdk.Web` to the rest of the system?**
-  _100 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Task` be split into smaller, more focused modules?**
-  _Cohesion score 0.13506012950971322 - nodes in this community are weakly interconnected._
-- **Why does `Booking` connect `Booking Entity` to `Task`, `EntityTypeBuilder`, `Forte Group Live Coding & Mock Interview Practice Plan`, `TeeSheetDbContext`, `Booking & Payment Statuses`, `TeeTime Entity`, `Golfer Entity`, `TeeSheet.Domain`, `SQL Schema Tables`, `Payment`, `DateTime`?**
-  _High betweenness centrality (0.169) - this node is a cross-community bridge._
+  _101 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Projects, Compose & SQL Server` be split into smaller, more focused modules?**
   _Cohesion score 0.07539118065433854 - nodes in this community are weakly interconnected._
+- **Why does `Booking` connect `Booking Entity` to `Task`, `Forte Group Live Coding & Mock Interview Practice Plan`, `Course`, `TeeSheetDbContext`, `Payment`, `TeeTime Entity`, `Golfer Entity`, `SQL Schema Tables`, `TeeSheet.Domain`, `DateTime`?**
+  _High betweenness centrality (0.171) - this node is a cross-community bridge._
+- **Should `microsoft_entityframeworkcore` be split into smaller, more focused modules?**
+  _Cohesion score 0.0666049953746531 - nodes in this community are weakly interconnected._
 
 ### Low-confidence Hints
 _AMBIGUOUS edges — the extractor was unsure. Verify before acting on these._

@@ -34,9 +34,53 @@ public static class BookingEndpoints
         // 409 with ProblemDetails when full
         // Test to write: an integration test that fires 10 parallel POSTs for 1 player each at a tee time with capacity 4. Assert exactly 4 succeed and 6 get 409. This is the test that impresses. Follow-ups: Why is "read, check, then write" a race? Which isolation level would make it safe, and what would that cost? How do you handle DbUpdateConcurrencyException?
         // -----------------------------------------------------------------------------
-         group.MapPost("/", CreateBookingRequest);    
+         group.MapPost("/", CreateBookingRequest);  
+         group.MapPatch("/{id:int}", UpdateBookedCount ); 
 
         return app;
+    }
+
+     static async Task<Results<NoContent, ProblemHttpResult>> UpdateBookedCount(
+        int id, BookingRequestUpdateBookedDto bookingRequest, TeeSheetDbContext db, CancellationToken ct)
+    {
+        var isExistedBookingId = await db.Bookings.Where(s => s.BookingId == id)
+        .FirstOrDefaultAsync(ct);
+       
+       if(isExistedBookingId == null)
+            return TypedResults.Problem(
+                statusCode:StatusCodes.Status404NotFound, 
+                title:"Booking not found" );
+
+        if(!BookingRules.IsValidPlayers(bookingRequest.Players))
+              return TypedResults.Problem(
+                statusCode:StatusCodes.Status400BadRequest,
+                title:"Players must be 1 to 4" );
+
+        if(!BookingRules.CanChangePlayers(isExistedBookingId.Status))
+                 return TypedResults.Problem(
+                statusCode:StatusCodes.Status409Conflict, 
+                title:"Can't change a cancelled booking" );
+
+        // No negative delta: EF sends parameters compared with a tinyint column as byte, so -2 would overflow.
+        var oldPlayers = isExistedBookingId.Players;
+        var newPlayers = bookingRequest.Players;
+
+        await using var tx = await db.Database.BeginTransactionAsync(ct);        
+        
+        var rowAffected =  await db.TeeTimes
+        .Where(s => s.TeeTimeId == isExistedBookingId.TeeTimeId && s.BookedPlayers - oldPlayers + newPlayers <= s.Capacity )
+        .ExecuteUpdateAsync(s => s.SetProperty(
+                t => t.BookedPlayers,
+                t => (byte)(t.BookedPlayers - oldPlayers + newPlayers)), ct);
+       
+       if (rowAffected == 0)
+            return TypedResults.Problem(statusCode: StatusCodes.Status409Conflict, title: "Tee time is full");
+
+        isExistedBookingId.Players = bookingRequest.Players;
+        await db.SaveChangesAsync(ct);
+        await tx.CommitAsync(ct);
+
+       return TypedResults.NoContent();
     }
 
     static async Task<Results<Created, ProblemHttpResult>> CreateBookingRequest(

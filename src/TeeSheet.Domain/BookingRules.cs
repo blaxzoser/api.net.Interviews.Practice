@@ -17,6 +17,9 @@ public static class BookingRules
     public static bool IsWithinBookingWindow(DateTime startUtc, bool isMember, DateTime nowUtc) =>
         startUtc <= nowUtc.AddDays(isMember ? MemberWindowDays : VisitorWindowDays);
 
+    /// <summary>A4: a cancelled booking can't be changed.</summary>
+    public static bool CanChangePlayers(BookingStatus status) => status != BookingStatus.Cancelled;
+
     /// <summary>R3: a held booking expires 10 minutes after it is created.</summary>
     public static DateTime HoldExpiresUtc(DateTime nowUtc) => nowUtc.AddMinutes(HoldMinutes);
 }
