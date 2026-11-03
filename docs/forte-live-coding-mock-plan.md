@@ -272,15 +272,35 @@ About 2–3 h on weekdays and 4–5 h on weekend days. Adjust to your interview 
 
 ---
 
-### A3 — POST create booking (35 min) ★★ most likely live task
+### A3 — POST create booking and UPDATE tee time (75 min) ★★ most likely live task
 **Build:** `POST /api/bookings` with `CreateBookingRequest { teeTimeId, golferId, players }`.
+
+**Request body:**
+```json
+{
+  "teeTimeId": 42,
+  "golferId": 7,
+  "players": 3
+}
+```
+
+| Field | Type | Meaning |
+|---|---|---|
+| `teeTimeId` | int | The tee time to book; it must exist and be in the future |
+| `golferId` | int | The golfer making the booking; their member or visitor status decides the R4 booking window |
+| `players` | int, 1–4 | **How many** spots to reserve. It is a count, not an array of golfer ids |
+
 **Acceptance:**
 - Validation: players 1–4; tee time exists; tee time is in the future; R4 (members 14 days / visitors 7 days)
-- **R1 enforced safely under concurrency.** Pick one approach and explain it:
+  - **R4 is the advance booking window:** how far ahead of the tee time a golfer may book. Load the golfer by `golferId` (`404` if not found), and use `Golfers.IsMember` to pick the limit: `true` = 14 days, `false` = 7 days.
+  - **Allowed when:** `teeTime.StartUtc <= nowUtc.AddDays(limit)`. Exactly on the limit is allowed. Otherwise return `422` with ProblemDetails.
+  - **Example at 2026-11-02 10:00 UTC:** a member can book up to 2026-11-16 10:00 UTC, and a visitor up to 2026-11-09 10:00 UTC. For a tee time on 2026-11-12, the member succeeds and the visitor gets `422`.
+- **Two writes in one transaction:** `INSERT` the new row into `Bookings`, and `UPDATE` the existing `TeeTimes` row to add the players to `BookedPlayers`. If either fails, neither is saved.
+- **R1 enforced safely under concurrency when reserving the spots on `TeeTimes`.** Pick one approach and explain it:
   - (a) atomic conditional `UPDATE ... WHERE BookedPlayers + @p <= Capacity`, check rows affected, or
   - (b) EF Core optimistic concurrency on `RowVersion` + retry, or
   - (c) a transaction with `UPDLOCK, ROWLOCK` hint
-- Creates the booking as `Held` with `HoldExpiresUtc = now + 10 min` (R3)
+- The inserted booking has status `Held` and `HoldExpiresUtc = now + 10 min` (R3)
 - Returns `201 Created` with a `Location` header pointing to `GET /api/bookings/{id}`
 - `409` with ProblemDetails when full
 

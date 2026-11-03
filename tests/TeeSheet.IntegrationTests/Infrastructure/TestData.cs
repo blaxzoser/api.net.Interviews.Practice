@@ -4,6 +4,25 @@ namespace TeeSheet.IntegrationTests.Infrastructure;
 
 public static class TestData
 {
+    /// <summary>Inserts a golfer and returns the new golfer id.</summary>
+    public static Task<int> SeedGolferAsync(this ApiFactory factory, bool isMember)
+    {
+        return factory.WithDbAsync(async db =>
+        {
+            var golfer = new Golfer
+            {
+                FirstName = "Test",
+                LastName = "Golfer",
+                Email = $"{Guid.NewGuid():N}@example.com",
+                IsMember = isMember
+            };
+
+            db.Golfers.Add(golfer);
+            await db.SaveChangesAsync();
+            return golfer.GolferId;
+        });
+    }
+
     /// <summary>Inserts a course with one tee time (capacity 4) and returns the new tee time id.</summary>
     public static Task<int> SeedTeeTimeAsync(
         this ApiFactory factory,

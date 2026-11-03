@@ -36,6 +36,7 @@ if (app.Environment.IsDevelopment())
 
 app.MapHealthChecks("/health");
 app.MapTeeTimeEndpoints();
+app.MapBookingEndpoints();
 
 app.Run();
 

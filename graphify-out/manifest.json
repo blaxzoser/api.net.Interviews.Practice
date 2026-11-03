@@ -54,10 +54,10 @@
     "semantic_hash": ""
   },
   "src/TeeSheet.Api/Program.cs": {
-    "mtime": 1792619813.8548307,
-    "seen": 1792629994.316805,
-    "ast_hash": "6f268071583097b47dfe88aa9506ddc0",
-    "semantic_hash": "6f268071583097b47dfe88aa9506ddc0"
+    "mtime": 1793646666.8313675,
+    "seen": 1793646712.928174,
+    "ast_hash": "d4da4c423d920b1fa417edfa4f5bd9bb",
+    "semantic_hash": ""
   },
   "src/TeeSheet.Api/Properties/launchSettings.json": {
     "mtime": 1792619814.167289,
@@ -198,10 +198,10 @@
     "semantic_hash": "558a66eacc6f06464c049be6225de340"
   },
   "tests/TeeSheet.IntegrationTests/Infrastructure/TestData.cs": {
-    "mtime": 1792619820.9111047,
-    "seen": 1792629994.3168483,
-    "ast_hash": "b8d96828751f3dbd2a56c1c80c1ad052",
-    "semantic_hash": "b8d96828751f3dbd2a56c1c80c1ad052"
+    "mtime": 1793646545.452568,
+    "seen": 1793646712.9282372,
+    "ast_hash": "5b0ceb48793e92f74e606691f3aa218d",
+    "semantic_hash": ""
   },
   "tests/TeeSheet.IntegrationTests/TeeSheet.IntegrationTests.csproj": {
     "mtime": 1792619821.1484027,
@@ -234,10 +234,10 @@
     "semantic_hash": "eeb3f86f14976c86312de863145536eb"
   },
   "docs/forte-live-coding-mock-plan.md": {
-    "mtime": 1792618837.5867171,
-    "seen": 1792629994.3168583,
-    "ast_hash": "426a657afbf5add8b09f4c27c131d2fb",
-    "semantic_hash": "426a657afbf5add8b09f4c27c131d2fb"
+    "mtime": 1793646820.4302702,
+    "seen": 1793646829.3071134,
+    "ast_hash": "ed0663b3e39fd8c5f508d7e926af1e51",
+    "semantic_hash": ""
   },
   "src/TeeSheet.Api/Endpoints/CoursesEndpoints.cs": {
     "mtime": 1792649507.930852,
@@ -282,9 +282,45 @@
     "semantic_hash": ""
   },
   "docs/track-by-blaxzoser.md": {
-    "mtime": 1792641944.2723856,
-    "seen": 1792649581.28911,
-    "ast_hash": "af48091f573f338bc6b5130f013fd4c0",
+    "mtime": 1793646819.604004,
+    "seen": 1793646829.3071215,
+    "ast_hash": "6222a4854f72751e7b33a944782dbb8a",
+    "semantic_hash": ""
+  },
+  "src/TeeSheet.Api/Endpoints/BookingsEndpoints.cs": {
+    "mtime": 1793646821.287138,
+    "seen": 1793646829.306783,
+    "ast_hash": "7a7e1e7c4ec884bf9521485a96b00581",
+    "semantic_hash": ""
+  },
+  "src/TeeSheet.Dto/TeeSheet.Dto/BookingRequestDto.cs": {
+    "mtime": 1793644312.5281925,
+    "seen": 1793646712.9282067,
+    "ast_hash": "47d585f4d34f246570634c0de03958dd",
+    "semantic_hash": ""
+  },
+  "src/TeeSheet.Domain/BookingRules.cs": {
+    "mtime": 1793646533.4854627,
+    "seen": 1793646712.9281926,
+    "ast_hash": "4d02e42c4fddc6aa00a5031ca20a2270",
+    "semantic_hash": ""
+  },
+  "tests/TeeSheet.IntegrationTests/A3_CreateBookingTests.cs": {
+    "mtime": 1793646546.2814288,
+    "seen": 1793646712.9282303,
+    "ast_hash": "b8ab72ccdf1e092e2880dc408f68c1ad",
+    "semantic_hash": ""
+  },
+  "tests/TeeSheet.UnitTests/BookingRulesTests.cs": {
+    "mtime": 1793646544.5612943,
+    "seen": 1793646712.9282403,
+    "ast_hash": "4d1fa736147b772368e24ad7c3795fef",
+    "semantic_hash": ""
+  },
+  "docs/cheatsheet-transactions.md": {
+    "mtime": 1793647170.5083377,
+    "seen": 1793647177.2238028,
+    "ast_hash": "068f3a1fa4d1286ef3cdf4789009da60",
     "semantic_hash": ""
   }
 }
